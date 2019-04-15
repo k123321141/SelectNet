@@ -22,7 +22,14 @@
 ### Toy example, bmi
 y = w / (h^2) + small noise, scalar</br>
 X是四維的向量，前兩維x1,x2 = w, h，後兩維x3,x4分別是不重要的normal distrbution。</br>
-![Alt text][bmi_summary]
+![bmi log summary][bmi_summary]</br>
+mse loss相當低代表network可以fit 這個回歸問題。</br>
+w也持續下降中</br>
+![bmi w chart][bmi_w]</br>
+最終ratio_w顯示，Network只使用了前兩項w,h就可以fit這個回歸問題，表示這個regularization tern可以找出哪些feature才是network有使用到的。</br>
+w3, w4趨近於0
+![bmi ratio_w chart][bmi_ratio_w]</br>
+
 
 
 ### 對於非相關項的噪音抵抗力
@@ -36,4 +43,6 @@ X是四維的向量，前兩維x1,x2 = w, h，後兩維x3,x4分別是不重要�
 
 [other loss function](#other-loss)
 
-[bmi_summary]: https://github.com/k123321141/SelectNet/data/figures/bmi_summary.png
+[bmi_summary]: https://github.com/k123321141/SelectNet/blob/master/data/figures/bmi_summary.png
+[bmi_w]: https://github.com/k123321141/SelectNet/blob/master/data/figures/bmi_w.png
+[bmi_w_ratio]: https://github.com/k123321141/SelectNet/blob/master/data/figures/bmi_w_ratio.png
