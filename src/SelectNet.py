@@ -10,12 +10,13 @@ class SelectLayer(nn.Module):
     def __init__(self, in_dim):
         super(SelectLayer, self).__init__()
         self.in_dim = in_dim
-        self.w = nn.Parameter(torch.ones([1, in_dim], dtype=torch.float)*1)
+        self.w = nn.Parameter(torch.ones([1, in_dim], dtype=torch.float)*10)
         self.w.requires_grad_(True)
 
     def forward(self, x):
         batch, _ = x.shape
         ratio = self.calc_ratio() * self.in_dim
+        # ratio = self.calc_ratio()
         out = ratio.repeat(batch, 1) * x
         return out
 
