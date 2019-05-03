@@ -2,8 +2,11 @@
 
 
 # Feature screening using signal-to-noise ratios, nercom, 2010. 96 citations.
-short critique : </br>
+short critique : 這篇沒什麼作用，主要是提出的方法並不實用，但是提供了另一種衡量feature saliency 的方式，SNR based。</br></br>
 support : 裡面分了三個feature saliency measure. Partial derivative based, weighted based and SNR based.</br>
+
+
+## content
 裡面採用的例子是single layer fully-connected network，如果要推廣到其他架構的話需要額外補充，現就這個簡單例子說明。</br>
 Partial derivative based : 直接計算對xi的偏微分值，以gradient表示該feature的重要性，要注意是activation function需要被計算。</br>
 <a href="https://www.codecogs.com/eqnedit.php?latex=\Lambda_i&space;=&space;\frac{1}{K}&space;\cdot&space;\frac{1}{M_{train}}\cdot\sum^K_{k=1}\sum^{M_{train}}_{m=1}\left&space;|&space;\frac{\partial&space;z_{k,m(x_m,W)}}{\partial&space;x_{i,m}}&space;\right&space;|" target="_blank"><img src="https://latex.codecogs.com/gif.latex?\Lambda_i&space;=&space;\frac{1}{K}&space;\cdot&space;\frac{1}{M_{train}}\cdot\sum^K_{k=1}\sum^{M_{train}}_{m=1}\left&space;|&space;\frac{\partial&space;z_{k,m(x_m,W)}}{\partial&space;x_{i,m}}&space;\right&space;|" title="\Lambda_i = \frac{1}{K} \cdot \frac{1}{M_{train}}\cdot\sum^K_{k=1}\sum^{M_{train}}_{m=1}\left | \frac{\partial z_{k,m(x_m,W)}}{\partial x_{i,m}} \right |" /></a></br>
@@ -25,9 +28,19 @@ wi,j一樣表示第一層weight對於第i個feature對第j個neuron的weight，�
 每種各訓練10次，總共270次實驗，做平均後去觀察每個feature的重要排序程度。</br>
 原先的feature有4種，再加上額外4個不相干的noise feature (Uniform[0,1])，然後再加上noise node跟bias。總共10個。</br>
 每次記錄一下每個feature的排名，圖中不包含noise node跟bias的排名。</br>
+黑線代表noise node的排名。</br>
 ![Feature Ranking][fig1]</br>
+可以看得出來noise feature 跟 noise node的分布很相似，但是作者還是利用了相關性統計檢定來說服讀者。</br>
+spearman's correlation test</br>
+再來則是描述做feature seleciton的作法：
+1. 訓練直到SNR穩定，記錄在test set上的performance。
+2. 拿掉最低SNR的feature。
+接下來兩張圖則是用本文中提到的做法，逐次拿掉feature造成的performance drop。</br>
+以及PCA投影的performance drop。</br>
+![Feature Ranking][fig2]</br>
+![Feature Ranking][fig3]</br>
+作者想說明的是，文中提到的方法與PCA的效果相似，所以是合理的。</br>
 
-
-[fig1]: https://github.com/k123321141/SelectNet/blob/master/data/figures/bmi_summary.png
-
-
+[fig1]: https://github.com/k123321141/SelectNet/blob/master/refs/Feature%20screening%20using%20signal-to-noise%20ratios%2C%20nercom%2C%202010%2C%2096/fig1.png
+[fig2]: https://github.com/k123321141/SelectNet/blob/master/refs/Feature%20screening%20using%20signal-to-noise%20ratios%2C%20nercom%2C%202010%2C%2096/fig2.png
+[fig3]: https://github.com/k123321141/SelectNet/blob/master/refs/Feature%20screening%20using%20signal-to-noise%20ratios%2C%20nercom%2C%202010%2C%2096/fig3.png
