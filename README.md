@@ -1,6 +1,6 @@
 ## Abstract
 
-> Feature selection plays an important role in many machine learning and data mining applications. We propose a regularization loss on feature space, $$x, w \in R^d, \hat y= f(x\cdot w|\theta)$$ ,to force the model using the less feature group to solve the original problem. As common regularization loss in Deep Learning, we apply L1 norm on w, and use SGD to make it converged.
+> Feature selection plays an important role in many machine learning and data mining applications. We propose a regularization loss on feature space, <a href="https://www.codecogs.com/eqnedit.php?latex=x,&space;w&space;\in&space;R^d,&space;\hat&space;y=&space;f(x\cdot&space;w|\theta)" target="_blank"><img src="https://latex.codecogs.com/gif.latex?x,&space;w&space;\in&space;R^d,&space;\hat&space;y=&space;f(x\cdot&space;w|\theta)" title="x, w \in R^d, \hat y= f(x\cdot w|\theta)" /></a> ,to force the model using the less feature group to solve the original problem. As common regularization loss in Deep Learning, we apply L1 norm on w, and use SGD to make it converged.
 >
 # Introduction
 Deep learning 一般來說是不做feature selection，其優異的分類能力，使人們仍然能夠接受黑箱的缺點。</br>
