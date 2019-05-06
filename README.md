@@ -1,3 +1,18 @@
+## Abstract
+
+> Feature selection plays an important role in many machine learning and data mining applications. We propose a regularization loss on feature space, $$x, w \in R^d, \hat y= f(x\cdot w|\theta)$$ ,to force the model using the less feature group to solve the original problem. As common regularization loss in Deep Learning, we apply L1 norm on w, and use SGD to make it converged.
+>
+# Introduction
+Deep learning 一般來說是不做feature selection，其優異的分類能力，使人們仍然能夠接受黑箱的缺點。</br>
+Feature selection 在Network上有幾種做法：</br>
+1. weight based : 針對與某項feature相關的weight，越重要的feature其表現會作用在這些相關的weight上。
+2. output sensitivity based : 針對某項特定的feature對於模型的輸出影響力大小，常見做法是做feature ranking，然後逐次移除feature。
+
+
+weight based的缺點是，network的複雜度越大，越難以分析weight之間的作用程度，包括shared-weight以及activation function。</br>
+而output sensitivity based的缺點有兩個，除去特定feature的過程屬於greedy strategy，並且重複訓練的過程非常耗費運算資源。</br>
+這篇的做法透過觀察w收斂的趨勢，了解作用在feature space上的機率分佈。
+
 
 # Original regression loss in Deep learning
 
@@ -15,9 +30,15 @@
 <a href="https://www.codecogs.com/eqnedit.php?latex=w'&space;=&space;sigmoid(w)&space;\newline&space;w_{ratio}&space;=&space;w'&space;/&space;\sum^d_i&space;w_i',&space;w_{ratio}&space;\in&space;R^d&space;\newline&space;\hat{y}&space;=&space;f&space;\left&space;(&space;w_{ratio}&space;\odot&space;x&space;\mid&space;\Theta&space;\right&space;),&space;x,&space;w\in&space;R^d&space;\newline&space;Loss&space;=\alpha\left&space;\|&space;\Theta&space;\right&space;\|_2&space;&plus;&space;\beta\left&space;\|&space;w'&space;\right&space;\|_1&plus;&space;\gamma&space;entropy\left&space;(&space;w_{ratio}&space;\right&space;)&space;&plus;(\hat{y}&space;-&space;y)^2" target="_blank"><img src="https://latex.codecogs.com/gif.latex?w'&space;=&space;sigmoid(w)&space;\newline&space;w_{ratio}&space;=&space;w'&space;/&space;\sum^d_i&space;w_i',&space;w_{ratio}&space;\in&space;R^d&space;\newline&space;\hat{y}&space;=&space;f&space;\left&space;(&space;w_{ratio}&space;\odot&space;x&space;\mid&space;\Theta&space;\right&space;),&space;x,&space;w\in&space;R^d&space;\newline&space;Loss&space;=\alpha\left&space;\|&space;\Theta&space;\right&space;\|_2&space;&plus;&space;\beta\left&space;\|&space;w'&space;\right&space;\|_1&plus;&space;\gamma&space;entropy\left&space;(&space;w_{ratio}&space;\right&space;)&space;&plus;(\hat{y}&space;-&space;y)^2" title="w' = sigmoid(w) \newline w_{ratio} = w' / \sum^d_i w_i', w_{ratio} \in R^d \newline \hat{y} = f \left ( w_{ratio} \odot x \mid \Theta \right ), x, w\in R^d \newline Loss =\alpha\left \| \Theta \right \|_2 + \beta\left \| w' \right \|_1+ \gamma entropy\left ( w_{ratio} \right ) +(\hat{y} - y)^2" /></a></br></br>
 
 目前正在研究加入entropy是否有幫助。</br>
-透過對sigmoid(w)做L1 loss而不是直接針對w，使得w'可以持續下降到負數，相較於w只能下降到0更加smooth。</br>
-並且就不需要使用softmax來模擬distribution，可以直接使用summation ratio，原因也是因為summation比較不陡峭，</br>
-在w'極小值時，loss會比softmax指數還要大，藉此比較容易下降到0。</br>
+透過對sigmoid(w)做L1 loss而不是直接針對w，使得w'可以持續下降到負數，相較於w只能下降到0更加smooth(?)。</br>
+(CK老師建議直接使用relu來試試看。)</br>
+另外可以使用softmax或是summation ratio來利用w_prine形成feature saliency。</br>
+目前採用summation ratio，原因也是因為summation比較不陡峭。(需要補充說明)</br>
+(在w'極小值時，loss會比softmax指數還要大，藉此比較容易下降到0。)</br>
+
+由此一來透過觀察w_ratio就可以理解feature如何經過w_ratio的weight mask然後進入模型的輸入。</br>
+可以設定某個threshold來做feature selection，後面MNIST的例子就是如此。
+
 目前只是實驗猜測，下列嘗試過的[Loss function](#other-loss)
 
 
@@ -37,8 +58,10 @@ summary</br></br>
 
 ## MNIST example
 由於numerical data比較難以找出feature saliency。</br>
-所以先使用圖片
-
+實驗設定的threshold是0.001</br>
+看看w_ratio，看得出明顯差異，我解釋成某些pixel是比較重要的。</br>
+再更進一步地去除w_ratio < threshold的pixel，兩次同參數的訓練結果如下。</br>
+![mnist_mask_1][mnist_mask_1]![mnist_mask_2][mnist_mask_2]</br>
 
 
 
@@ -53,6 +76,10 @@ summary</br></br>
 [bmi_summary]: https://github.com/k123321141/SelectNet/blob/master/data/figures/bmi_summary.png
 [bmi_w]: https://github.com/k123321141/SelectNet/blob/master/data/figures/bmi_w.png
 [bmi_w_ratio]: https://github.com/k123321141/SelectNet/blob/master/data/figures/bmi_w_ratio.png
+[mnist_overview]: https://github.com/k123321141/SelectNet/blob/master/data/figures/mnist_overview.png
+[mnist_ratio]: https://github.com/k123321141/SelectNet/blob/master/data/figures/mnist_overview.png
+[mnist_mask_1]: https://github.com/k123321141/SelectNet/blob/master/data/figures/mnist_mask1.png
+[mnist_mask_2]: https://github.com/k123321141/SelectNet/blob/master/data/figures/mnist_mask2.png
 
 
 ### 與單變量統計以及線性模型的比較，XOR資料
@@ -81,12 +108,6 @@ Drawbacks : 首先是greedy的順序有沒有影響不確定，這是對於exhau
 3. Feature screening using signal-to-noise ratios, nercom, 2010. 96 citations.</br></br>
 short critique : 這篇沒什麼作用，主要是提出的方法並不實用，但是提供了另一種衡量feature saliency 的方式，SNR based。</br></br>
 support : 裡面分了三個feature saliency measure. Partial derivative based, weighted based and SNR based.</br>
-
-## other loss
-[bmi_summary]: https://github.com/k123321141/SelectNet/blob/master/data/figures/bmi_summary.png
-[bmi_w]: https://github.com/k123321141/SelectNet/blob/master/data/figures/bmi_w.png
-[bmi_w_ratio]: https://github.com/k123321141/SelectNet/blob/master/data/figures/bmi_w_ratio.png
-
 
 4. Feature selection with neural networks, 2001. 236 citaions.</br>
 short critique : 
