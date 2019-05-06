@@ -73,14 +73,7 @@ summary</br></br>
 
 
 ## other loss
-[bmi_summary]: https://github.com/k123321141/SelectNet/blob/master/data/figures/bmi_summary.png
-[bmi_w]: https://github.com/k123321141/SelectNet/blob/master/data/figures/bmi_w.png
-[bmi_w_ratio]: https://github.com/k123321141/SelectNet/blob/master/data/figures/bmi_w_ratio.png
-[mnist_overview]: https://github.com/k123321141/SelectNet/blob/master/data/figures/mnist_overview.png
-[mnist_ratio]: https://github.com/k123321141/SelectNet/blob/master/data/figures/mnist_overview.png
-[mnist_mask_1]: https://github.com/k123321141/SelectNet/blob/master/data/figures/mnist_mask1.png
-[mnist_mask_2]: https://github.com/k123321141/SelectNet/blob/master/data/figures/mnist_mask2.png
-
+Loss
 
 ### 與單變量統計以及線性模型的比較，XOR資料
 
@@ -118,4 +111,13 @@ support : 裡面提到了有weights-based(上面那篇)跟signal-to-noise retio�
 注意一下matrix norm。 norm2,1會造成出現zero row而norm1,2 出現zero column，</br>
 這代表要出現dead neuron，對所有connected link的weight都是零。</br>
 或是filter neuron，只對特定幾個connected link的weight是零。</br>
+
+
+[bmi_summary]: https://github.com/k123321141/SelectNet/blob/master/data/figures/bmi_summary.png
+[bmi_w]: https://github.com/k123321141/SelectNet/blob/master/data/figures/bmi_w.png
+[bmi_w_ratio]: https://github.com/k123321141/SelectNet/blob/master/data/figures/bmi_w_ratio.png
+[mnist_overview]: https://github.com/k123321141/SelectNet/blob/master/data/figures/mnist_overview.png
+[mnist_ratio]: https://github.com/k123321141/SelectNet/blob/master/data/figures/mnist_overview.png
+[mnist_mask_1]: https://github.com/k123321141/SelectNet/blob/master/data/figures/mnist_mask_1.png
+[mnist_mask_2]: https://github.com/k123321141/SelectNet/blob/master/data/figures/mnist_mask_2.png
 
