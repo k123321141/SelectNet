@@ -35,6 +35,11 @@ w3, w4趨近於0</br></br>
 summary</br></br>
 ![bmi log summary][bmi_summary]</br>
 
+## MNIST example
+由於numerical data比較難以找出feature saliency。</br>
+所以先使用圖片
+
+
 
 
 ### 對於非相關項的噪音抵抗力
@@ -52,6 +57,9 @@ summary</br></br>
 
 ### 與單變量統計以及線性模型的比較，XOR資料
 
+### feature ranking
+有沒有可能每次用不同組的feature去做過濾，然後留下來的feature就得分。</br>
+以得分高低來說明feature的重要性。</br>
 
 ### related papers
 1. A Penalty-Function Approach for Pruning Feedforward Neural Networks, IEEE, 1997. 246 citations. </br></br>
@@ -83,4 +91,10 @@ support : 裡面分了三個feature saliency measure. Partial derivative based, 
 4. Feature selection with neural networks, 2001. 236 citaions.</br>
 short critique : 
 support : 裡面提到了有weights-based(上面那篇)跟signal-to-noise retio以及output sensitivity based以及三個方面，survey的時候可以注意。</br>
+
+5. Feature Selection Based on Structured Sparsity- A Comprehensive Study, IEEE, 2017. 95</br>
+在考慮不同feature group，要實現feature ranking時，可以考慮group lasso。</br>
+注意一下matrix norm。 norm2,1會造成出現zero row而norm1,2 出現zero column，</br>
+這代表要出現dead neuron，對所有connected link的weight都是零。</br>
+或是filter neuron，只對特定幾個connected link的weight是零。</br>
 

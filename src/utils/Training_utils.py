@@ -112,7 +112,7 @@ def train(
                                          train_acc.item(), val_acc.item(),
                                          src_loss.item(), val_src_loss.item(),
                                          w_loss.item(), entropy_loss.item(),
-                                         reg_loss.item(), buf)
+                                         reg_loss.item(), buf.encode('ascii', 'ignore'))
                 pbar.set_postfix_str(buf_str)
                 if epoch >= 0 and iters % 10 == 0:
                     writer.add_scalars(
