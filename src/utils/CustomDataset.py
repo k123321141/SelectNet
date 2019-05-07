@@ -14,8 +14,8 @@ class CustomDataset(Dataset):
         return len(self.Y)
 
     def __getitem__(self, idx):
-        x = self.X[idx, :]
-        y = self.Y[idx, :]
+        x = self.X[idx]
+        y = self.Y[idx]
         if self.x_transforms:
             x = self.x_transforms(x)
         if self.y_transforms:

@@ -2,6 +2,7 @@ import numpy as np
 import torch
 import torch.utils.data
 import torch.nn.functional as F
+import torch.nn as nn
 import sklearn.preprocessing
 import sklearn.metrics
 
@@ -53,6 +54,14 @@ def add_noise_on_pixel(x, pixel_mask, distribution):
     return ret
 
 
+# handle the dimension error, the multi-class require input : (N, C), label : (N)
+def warp_loss_fn(loss_criterion, x, y):
+    if type(loss_criterion) is nn.CrossEntropyLoss:
+        return loss_criterion(x, y.flatten())
+    else:
+        return loss_criterion(x, y)
+
+
 def train(
         model, opt, src_loss_criterion, train_dataloader, val_dataloader,
         alpha, beta, gamma, epochs, noise_fn, metric_fn, log_name, feature_names, K):
@@ -71,7 +80,8 @@ def train(
                 model.train()
                 train_out = model(x)
                 reg_loss, w_loss, entropy_loss = model.calc_reg_loss(F.mse_loss)
-                src_loss = src_loss_criterion(train_out, y)
+
+                src_loss = warp_loss_fn(src_loss_criterion, train_out, y)
                 loss = alpha*reg_loss + beta*w_loss + gamma*entropy_loss + src_loss
                 opt.zero_grad()
                 loss.backward()
@@ -81,13 +91,13 @@ def train(
                     model.eval()
 
                     val_out = model(val_x)
-                    val_src_loss = src_loss_criterion(val_out, val_y)
+                    val_src_loss = warp_loss_fn(src_loss_criterion, val_out, val_y)
 
     #                 noised
                     noised_train_out = model(noised_x)
                     noised_val_out = model(val_noised_x)
-                    noised_src = src_loss_criterion(noised_train_out, y)
-                    val_noised_src = src_loss_criterion(noised_val_out, val_y)
+                    noised_src = warp_loss_fn(src_loss_criterion, noised_train_out, y)
+                    val_noised_src = warp_loss_fn(src_loss_criterion, noised_val_out, val_y)
     #                 acc
                     train_acc = metric_fn(y, train_out)
                     val_acc = metric_fn(val_y, val_out)

@@ -58,11 +58,17 @@ summary</br></br>
 
 ## MNIST example
 由於numerical data比較難以找出feature saliency。</br>
+這邊有做縮放到10x10</br>
 實驗設定的threshold是0.001</br>
 看看w_ratio，看得出明顯差異，我解釋成某些pixel是比較重要的。</br>
 再更進一步地去除w_ratio < threshold的pixel，兩次同參數的訓練結果如下。</br>
 ![mnist_mask_1][mnist_mask_1]![mnist_mask_2][mnist_mask_2]</br>
+訓練過程:</br>
+![mnist_overview_1][mnist_overview_1]![mnist_overview_2][mnist_overview_2]</br>
 
+
+## CIFAR-10 example
+相較於mnist找出了有些pixel可以不使用，cifar-10找不出來明顯不重要的pixel。</br>
 
 
 ### 對於非相關項的噪音抵抗力
@@ -116,7 +122,8 @@ support : 裡面提到了有weights-based(上面那篇)跟signal-to-noise retio�
 [bmi_summary]: https://github.com/k123321141/SelectNet/blob/master/data/figures/bmi_summary.png
 [bmi_w]: https://github.com/k123321141/SelectNet/blob/master/data/figures/bmi_w.png
 [bmi_w_ratio]: https://github.com/k123321141/SelectNet/blob/master/data/figures/bmi_w_ratio.png
-[mnist_overview]: https://github.com/k123321141/SelectNet/blob/master/data/figures/mnist_overview.png
+[mnist_overview_1]: https://github.com/k123321141/SelectNet/blob/master/data/figures/mnist_overview_1.png
+[mnist_overview_2]: https://github.com/k123321141/SelectNet/blob/master/data/figures/mnist_overview_2.png
 [mnist_ratio]: https://github.com/k123321141/SelectNet/blob/master/data/figures/mnist_overview.png
 [mnist_mask_1]: https://github.com/k123321141/SelectNet/blob/master/data/figures/mnist_mask_1.png
 [mnist_mask_2]: https://github.com/k123321141/SelectNet/blob/master/data/figures/mnist_mask_2.png
