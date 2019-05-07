@@ -118,6 +118,18 @@ support : 裡面提到了有weights-based(上面那篇)跟signal-to-noise retio�
 這代表要出現dead neuron，對所有connected link的weight都是零。</br>
 或是filter neuron，只對特定幾個connected link的weight是零。</br>
 
+6. Feature Selection Based on Structured Sparsity- A Comprehensive Study, IEEE, 2017. 95
+這是一篇survey，從簡單的lasso linear regression開始談，以及他的變形group lasso, graph lasso等等。</br>
+另外一個概念是multi-task，直接透過norm of matrix來限制W，一樣利用norm p, 0 < p <= 1，來造成weight sparsity。</br>
+應該是想保留在multi-task底下，能夠做到feature selection在feature space上真正獨立，而不是只在特定任務下獨立。</br>
+
+目前比較有用的資訊是，透過norm p, 0 < p < 1 理論上，可以使得w比norm 1更加sparse，不過這邊要應用的話要特別注意optimization的問題。</br>
+暫時不考慮。</br>
+
+有提供相當多的performance比較，有簡單的單變量分析(chi-square, Fisher-score, etc.)</br>
+以及文中提到的一些方法，但是使用的dataset有些問題，不是太常見，而且需要申請。</br>
+再來是feature selection algorithm，並沒有詳細說明，猜測是先用ranking，然後逐一拿掉feature。</br>
+
 
 [bmi_summary]: https://github.com/k123321141/SelectNet/blob/master/data/figures/bmi_summary.png
 [bmi_w]: https://github.com/k123321141/SelectNet/blob/master/data/figures/bmi_w.png

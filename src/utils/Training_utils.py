@@ -64,7 +64,8 @@ def warp_loss_fn(loss_criterion, x, y):
 
 def train(
         model, opt, src_loss_criterion, train_dataloader, val_dataloader,
-        alpha, beta, gamma, epochs, noise_fn, metric_fn, log_name, feature_names, K):
+        alpha, beta, gamma, epochs, noise_fn, metric_fn, log_name, feature_names,
+        log_period=10, K=5):
     train_G = generator(train_dataloader)
     val_G = generator(val_dataloader)
     writer = SummaryWriter('./logs/%s-a%f,b%f,g%f' % (log_name, alpha, beta, gamma))
@@ -124,7 +125,7 @@ def train(
                                          w_loss.item(), entropy_loss.item(),
                                          reg_loss.item(), buf.encode('ascii', 'ignore'))
                 pbar.set_postfix_str(buf_str)
-                if epoch >= 0 and iters % 10 == 0:
+                if epoch >= 0 and iters % log_period == 0:
                     writer.add_scalars(
                             'data/loss',
                             {'train': loss.item()},
