@@ -107,6 +107,7 @@ Drawbacks : 首先是greedy的順序有沒有影響不確定，這是對於exhau
 3. Feature screening using signal-to-noise ratios, nercom, 2010. 96 citations.</br></br>
 short critique : 這篇沒什麼作用，主要是提出的方法並不實用，但是提供了另一種衡量feature saliency 的方式，SNR based。</br></br>
 support : 裡面分了三個feature saliency measure. Partial derivative based, weighted based and SNR based.</br>
+[單獨的critique][3]</br>
 
 4. Feature selection with neural networks, 2001. 236 citaions.</br>
 short critique : 
@@ -126,11 +127,34 @@ support : 裡面提到了有weights-based(上面那篇)跟signal-to-noise retio�
 目前比較有用的資訊是，透過norm p, 0 < p < 1 理論上，可以使得w比norm 1更加sparse，不過這邊要應用的話要特別注意optimization的問題。</br>
 暫時不考慮。</br>
 
+## 較新的works
+
+7. Feature Selection Based on Structured Sparsity- A Comprehensive Study, IEEE, 2017. 95</br>
+這是一篇針對比較古老方法的review，沒有提供太多面向，注重在介紹Group Lasso, Graph Lasso，以及一些feature structure等等。</br>
+我在這篇裡面得到比較有效的資訊是，有關解norm p, 0 < p < 1的方式，這個部分也許可以再加入SelectNet，形成更加sparse的weight。</br>
+分別是以下[兩篇](#norm-0.5)</br>
+還有一些比較被廣泛接受的概念，像是multi-task做feature selection會得到比較general的feature set。</br>
+還有一個好處是提供了相當多方法的實驗結果：</br>
+單變量統計的有Fisher Score, Gini, information Gain, T-test, Chi-Square test.</br>
+還有一些我認為比較不常用的，L1 SVM, Lasso等等。</br>
+但是這些dataset都不好找，有關生物資訊的，不是需要申請就是要錢，後面如果找不到適合的dataset可以再回來嘗試。</br>
+
+8. Feature Selection- A Data Perspective, IEEE, 2018, 265</br>
+這是一篇非常好的review，[單獨critique][8]，
+
+
+
+## norm 0.5
+A unified algorithm for mixed   𝑙2,𝑝 -minimizations and its application in feature selection, 2014. 23.</br>
+Feature Selection at the Discrete Limit, AAAI, 2014. 31.</br>
+
+
+
 有提供相當多的performance比較，有簡單的單變量分析(chi-square, Fisher-score, etc.)</br>
 以及文中提到的一些方法，但是使用的dataset有些問題，不是太常見，而且需要申請。</br>
 再來是feature selection algorithm，並沒有詳細說明，猜測是先用ranking，然後逐一拿掉feature。</br>
 
-
+[3]: https://github.com/k123321141/SelectNet/blob/master/refs/Feature%20screening%20using%20signal-to-noise%20ratios%2C%20nercom%2C%202010%2C%2096/README.md
 [bmi_summary]: https://github.com/k123321141/SelectNet/blob/master/data/figures/bmi_summary.png
 [bmi_w]: https://github.com/k123321141/SelectNet/blob/master/data/figures/bmi_w.png
 [bmi_w_ratio]: https://github.com/k123321141/SelectNet/blob/master/data/figures/bmi_w_ratio.png
