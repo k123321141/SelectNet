@@ -69,7 +69,8 @@ summary</br></br>
 
 ## CIFAR-10 example
 相較於mnist找出了有些pixel可以不使用，cifar-10找不出來明顯不重要的pixel。</br>
-
+以下是cifar-10的範例圖，我認爲這個結果是合理的。</br>
+![cifar10 example][cifar10_1]</br>
 
 ### 對於非相關項的噪音抵抗力
 
@@ -155,12 +156,13 @@ Feature Selection at the Discrete Limit, AAAI, 2014. 31.</br>
 再來是feature selection algorithm，並沒有詳細說明，猜測是先用ranking，然後逐一拿掉feature。</br>
 
 [3]: https://github.com/k123321141/SelectNet/blob/master/refs/Feature%20screening%20using%20signal-to-noise%20ratios%2C%20nercom%2C%202010%2C%2096/README.md
-[bmi_summary]: https://github.com/k123321141/SelectNet/blob/master/data/figures/bmi_summary.png
-[bmi_w]: https://github.com/k123321141/SelectNet/blob/master/data/figures/bmi_w.png
-[bmi_w_ratio]: https://github.com/k123321141/SelectNet/blob/master/data/figures/bmi_w_ratio.png
-[mnist_overview_1]: https://github.com/k123321141/SelectNet/blob/master/data/figures/mnist_overview_1.png
-[mnist_overview_2]: https://github.com/k123321141/SelectNet/blob/master/data/figures/mnist_overview_2.png
-[mnist_ratio]: https://github.com/k123321141/SelectNet/blob/master/data/figures/mnist_overview.png
-[mnist_mask_1]: https://github.com/k123321141/SelectNet/blob/master/data/figures/mnist_mask_1.png
-[mnist_mask_2]: https://github.com/k123321141/SelectNet/blob/master/data/figures/mnist_mask_2.png
+[bmi_summary]: https://github.com/k123321141/SelectNet/blob/master/figures/bmi_summary.png
+[bmi_w]: https://github.com/k123321141/SelectNet/blob/master/figures/bmi_w.png
+[bmi_w_ratio]: https://github.com/k123321141/SelectNet/blob/master/figures/bmi_w_ratio.png
+[mnist_overview_1]: https://github.com/k123321141/SelectNet/blob/master/figures/mnist_overview_1.png
+[mnist_overview_2]: https://github.com/k123321141/SelectNet/blob/master/figures/mnist_overview_2.png
+[mnist_ratio]: https://github.com/k123321141/SelectNet/blob/master/figures/mnist_overview.png
+[mnist_mask_1]: https://github.com/k123321141/SelectNet/blob/master/figures/mnist_mask_1.png
+[mnist_mask_2]: https://github.com/k123321141/SelectNet/blob/master/figures/mnist_mask_2.png
+[cifar10_1]: https://github.com/k123321141/SelectNet/blob/master/figures/cifar10_1.png
 
