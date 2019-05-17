@@ -105,7 +105,7 @@ Method : 首先使用全部N個feature訓練一個network，然後定義一個�
 具體來說是一個greedy strategy，有點像Decision Tree。</br>
 Drawbacks : 首先是greedy的順序有沒有影響不確定，這是對於exhausive search for optimal solution的取捨。再者是訓練時間太過誇張。time complexity = O(N! - k!), k = final feature count.</br>
 
-3. Feature screening using signal-to-noise ratios, nercom, 2010. 96 citations.</br></br>
+3. Feature screening using signal-to-noise ratios, nercom, 2000. 96 citations.</br></br>
 short critique : 這篇沒什麼作用，主要是提出的方法並不實用，但是提供了另一種衡量feature saliency 的方式，SNR based。</br></br>
 support : 裡面分了三個feature saliency measure. Partial derivative based, weighted based and SNR based.</br>
 [單獨的critique][3]</br>
@@ -114,34 +114,27 @@ support : 裡面分了三個feature saliency measure. Partial derivative based, 
 short critique : 
 support : 裡面提到了有weights-based(上面那篇)跟signal-to-noise retio以及output sensitivity based以及三個方面，survey的時候可以注意。</br>
 
+## 較新的works
+
 5. Feature Selection Based on Structured Sparsity- A Comprehensive Study, IEEE, 2017. 95</br>
-在考慮不同feature group，要實現feature ranking時，可以考慮group lasso。</br>
+這是一篇針對比較古老方法的review，沒有提供太多面向，注重在介紹Group Lasso, Graph Lasso，以及一些feature structure等等。</br>
+從簡單的lasso linear regression開始談，以及他的變形group lasso, graph lasso等等。</br>
+另外一個概念是multi-task，直接透過norm of matrix來限制W，一樣利用norm p, 0 < p <= 1，來造成weight sparsity。</br>
+應該是想保留在multi-task底下，能夠做到feature selection在feature space上真正獨立，而不是只在特定任務下獨立，會得到比較general的feature set。</br>
 注意一下matrix norm。 norm2,1會造成出現zero row而norm1,2 出現zero column，</br>
 這代表要出現dead neuron，對所有connected link的weight都是零。</br>
 或是filter neuron，只對特定幾個connected link的weight是零。</br>
+這對network pruning的設計有點幫助。</br>
 
-6. Feature Selection Based on Structured Sparsity- A Comprehensive Study, IEEE, 2017. 95
-這是一篇survey，從簡單的lasso linear regression開始談，以及他的變形group lasso, graph lasso等等。</br>
-另外一個概念是multi-task，直接透過norm of matrix來限制W，一樣利用norm p, 0 < p <= 1，來造成weight sparsity。</br>
-應該是想保留在multi-task底下，能夠做到feature selection在feature space上真正獨立，而不是只在特定任務下獨立。</br>
-
-目前比較有用的資訊是，透過norm p, 0 < p < 1 理論上，可以使得w比norm 1更加sparse，不過這邊要應用的話要特別注意optimization的問題。</br>
-暫時不考慮。</br>
-
-## 較新的works
-
-7. Feature Selection Based on Structured Sparsity- A Comprehensive Study, IEEE, 2017. 95</br>
-這是一篇針對比較古老方法的review，沒有提供太多面向，注重在介紹Group Lasso, Graph Lasso，以及一些feature structure等等。</br>
 我在這篇裡面得到比較有效的資訊是，有關解norm p, 0 < p < 1的方式，這個部分也許可以再加入SelectNet，形成更加sparse的weight。</br>
-分別是以下[兩篇](#norm-0.5)</br>
-還有一些比較被廣泛接受的概念，像是multi-task做feature selection會得到比較general的feature set。</br>
+分別是以下[兩篇](#norm 0.5)</br>
 還有一個好處是提供了相當多方法的實驗結果：</br>
 單變量統計的有Fisher Score, Gini, information Gain, T-test, Chi-Square test.</br>
 還有一些我認為比較不常用的，L1 SVM, Lasso等等。</br>
 但是這些dataset都不好找，有關生物資訊的，不是需要申請就是要錢，後面如果找不到適合的dataset可以再回來嘗試。</br>
 
-8. Feature Selection- A Data Perspective, IEEE, 2018, 265</br>
-這是一篇非常好的review，[單獨critique][8]，
+6. Feature Selection- A Data Perspective, IEEE, 2018, 265</br>
+這是一篇非常好的review，[單獨critique][6]，
 
 
 
@@ -156,6 +149,7 @@ Feature Selection at the Discrete Limit, AAAI, 2014. 31.</br>
 再來是feature selection algorithm，並沒有詳細說明，猜測是先用ranking，然後逐一拿掉feature。</br>
 
 [3]: https://github.com/k123321141/SelectNet/blob/master/refs/Feature%20screening%20using%20signal-to-noise%20ratios%2C%20nercom%2C%202010%2C%2096/README.md
+[8]: https://github.com/k123321141/SelectNet/blob/master/refs/Feature%20Selection-%20A%20Data%20Perspective%2C%20IEEE%2C%202018%2C%20265/README.md
 [bmi_summary]: https://github.com/k123321141/SelectNet/blob/master/figures/bmi_summary.png
 [bmi_w]: https://github.com/k123321141/SelectNet/blob/master/figures/bmi_w.png
 [bmi_w_ratio]: https://github.com/k123321141/SelectNet/blob/master/figures/bmi_w_ratio.png
