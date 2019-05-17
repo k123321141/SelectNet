@@ -127,7 +127,7 @@ support : 裡面提到了有weights-based(上面那篇)跟signal-to-noise retio�
 這對network pruning的設計有點幫助。</br>
 
 我在這篇裡面得到比較有效的資訊是，有關解norm p, 0 < p < 1的方式，這個部分也許可以再加入SelectNet，形成更加sparse的weight。</br>
-分別是以下[兩篇](#norm 0.5)</br>
+分別是以下[兩篇](#norm-0.5)</br>
 還有一個好處是提供了相當多方法的實驗結果：</br>
 單變量統計的有Fisher Score, Gini, information Gain, T-test, Chi-Square test.</br>
 還有一些我認為比較不常用的，L1 SVM, Lasso等等。</br>

@@ -3,11 +3,11 @@
 [Deep Feature Selection Theory and Application to Identify Enhancers and Promoters, 2016][1]
 這篇提供非常多不同類別的方法，我打算照文章順序描述這篇。</br>
 根據作者分類共分成</br>
-1. [Similarity based](#Similarity based)
-2. [Infomation Theoretical based](#Infomation_Theoretical_based)
-3. [Sparse Learning based](#Sparse_Learning_based)
-4. [Statistical based](#Statistical_based)
-5. [Other](#Other) <- 本篇重點
+1. [Similarity based](#similarity-based)
+2. [Infomation Theoretical based](#infomation-theoretical-based)
+3. [Sparse Learning based](#sparse-learning-based)
+4. [Statistical based](#statistical-based)
+5. [Other](#other) <- 本篇重點
 
 首先用一張圖表示Feature Selection帶來的好處。</br>
 ![Feature Ranking][fig1]</br>
