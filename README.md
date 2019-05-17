@@ -148,7 +148,7 @@ Feature Selection at the Discrete Limit, AAAI, 2014. 31.</br>
 再來是feature selection algorithm，並沒有詳細說明，猜測是先用ranking，然後逐一拿掉feature。</br>
 
 [3]: https://github.com/k123321141/SelectNet/blob/master/refs/Feature%20screening%20using%20signal-to-noise%20ratios%2C%20nercom%2C%202010%2C%2096/README.md
-[8]: https://github.com/k123321141/SelectNet/blob/master/refs/Feature%20Selection-%20A%20Data%20Perspective%2C%20IEEE%2C%202018%2C%20265/README.md
+[6]: https://github.com/k123321141/SelectNet/blob/master/refs/Feature%20Selection-%20A%20Data%20Perspective%2C%20IEEE%2C%202018%2C%20265/README.md
 [bmi_summary]: https://github.com/k123321141/SelectNet/blob/master/figures/bmi_summary.png
 [bmi_w]: https://github.com/k123321141/SelectNet/blob/master/figures/bmi_w.png
 [bmi_w_ratio]: https://github.com/k123321141/SelectNet/blob/master/figures/bmi_w_ratio.png
