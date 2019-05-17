@@ -74,10 +74,8 @@ DeepPINK reproducible feature selection in deep neural networks, IEEE, 2018, 7</
 
 
 
-[1]: 
-[2]:
-[exp1]: 
-[fig1]: https://github.com/k123321141/SelectNet/blob/master/refs/Feature%20screening%20using%20signal-to-noise%20ratios%2C%20nercom%2C%202010%2C%2096/fig1.png
-[fig2]: https://github.com/k123321141/SelectNet/blob/master/refs/Feature%20screening%20using%20signal-to-noise%20ratios%2C%20nercom%2C%202010%2C%2096/fig2.png
-[fig3]: https://github.com/k123321141/SelectNet/blob/master/refs/Feature%20screening%20using%20signal-to-noise%20ratios%2C%20nercom%2C%202010%2C%2096/fig3.png
-[fig4]: 
+[fig1]: https://github.com/k123321141/SelectNet/blob/master/refs/Feature%20Selection-%20A%20Data%20Perspective%2C%20IEEE%2C%202018%2C%20265/fig1.png 
+[fig2]: https://github.com/k123321141/SelectNet/blob/master/refs/Feature%20Selection-%20A%20Data%20Perspective%2C%20IEEE%2C%202018%2C%20265/fig2.png
+[fig3]: https://github.com/k123321141/SelectNet/blob/master/refs/Feature%20Selection-%20A%20Data%20Perspective%2C%20IEEE%2C%202018%2C%20265/fig3.png
+[fig4]: https://github.com/k123321141/SelectNet/blob/master/refs/Feature%20Selection-%20A%20Data%20Perspective%2C%20IEEE%2C%202018%2C%20265/fig4.png
+[exp1]: https://github.com/k123321141/SelectNet/blob/master/refs/Feature%20Selection-%20A%20Data%20Perspective%2C%20IEEE%2C%202018%2C%20265/exp1.png
