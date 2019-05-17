@@ -22,10 +22,7 @@
 ![heat map][fig3]</br>
 
 
-
-
-[fig1]: https://github.com/k123321141/SelectNet/blob/master/refs/Feature%20Selection-%20A%20Data%20Perspective%2C%20IEEE%2C%202018%2C%20265/fig1.png 
-[fig2]: https://github.com/k123321141/SelectNet/blob/master/refs/Feature%20Selection-%20A%20Data%20Perspective%2C%20IEEE%2C%202018%2C%20265/fig2.png
-[fig3]: https://github.com/k123321141/SelectNet/blob/master/refs/Feature%20Selection-%20A%20Data%20Perspective%2C%20IEEE%2C%202018%2C%20265/fig3.png
-[fig4]: https://github.com/k123321141/SelectNet/blob/master/refs/Feature%20Selection-%20A%20Data%20Perspective%2C%20IEEE%2C%202018%2C%20265/fig4.png
-[exp1]: https://github.com/k123321141/SelectNet/blob/master/refs/Feature%20Selection-%20A%20Data%20Perspective%2C%20IEEE%2C%202018%2C%20265/exp1.png
+[fig1]: https://github.com/k123321141/SelectNet/blob/master/refs/Deep%20Feature%20Selection%20Theory%20and%20Application%20to%20Identify%20Enhancers%20and%20Promoters%2C%202016%2C%2032%20citations/fig1.png
+[fig2]: https://github.com/k123321141/SelectNet/blob/master/refs/Deep%20Feature%20Selection%20Theory%20and%20Application%20to%20Identify%20Enhancers%20and%20Promoters%2C%202016%2C%2032%20citations/fig2.png
+[fig3]: https://github.com/k123321141/SelectNet/blob/master/refs/Deep%20Feature%20Selection%20Theory%20and%20Application%20to%20Identify%20Enhancers%20and%20Promoters%2C%202016%2C%2032%20citations/fig3.png
+[exp1]: https://github.com/k123321141/SelectNet/blob/master/refs/Deep%20Feature%20Selection%20Theory%20and%20Application%20to%20Identify%20Enhancers%20and%20Promoters%2C%202016%2C%2032%20citations/exp1.png

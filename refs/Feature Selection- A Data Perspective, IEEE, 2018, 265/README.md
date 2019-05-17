@@ -73,7 +73,7 @@ DeepPINK reproducible feature selection in deep neural networks, IEEE, 2018, 7</
 ![DeepPINK architecture][fig4]</br>
 
 
-
+[1]: https://github.com/k123321141/SelectNet/blob/master/refs/Deep%20Feature%20Selection%20Theory%20and%20Application%20to%20Identify%20Enhancers%20and%20Promoters%2C%202016%2C%2032%20citations/README.md
 [fig1]: https://github.com/k123321141/SelectNet/blob/master/refs/Feature%20Selection-%20A%20Data%20Perspective%2C%20IEEE%2C%202018%2C%20265/fig1.png 
 [fig2]: https://github.com/k123321141/SelectNet/blob/master/refs/Feature%20Selection-%20A%20Data%20Perspective%2C%20IEEE%2C%202018%2C%20265/fig2.png
 [fig3]: https://github.com/k123321141/SelectNet/blob/master/refs/Feature%20Selection-%20A%20Data%20Perspective%2C%20IEEE%2C%202018%2C%20265/fig3.png
