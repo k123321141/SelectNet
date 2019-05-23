@@ -1,6 +1,6 @@
 # Deep Feature Selection Theory and Application to Identify Enhancers and Promoters, 2016, 32 citations
 這篇的概念是從Lasso norm1 regularization loss 延伸而來。</br>
-首先有一個比較簡單的變形叫做elastic net，嘗試做norm1 跟 norm2 之間的平衡(？來源如有需要補充)。</br>
+首先有一個比較簡單的變形叫做elastic net，嘗試做norm1 跟 norm2 之間的平衡。</br>
 再來延伸到neural network。</br>
 
 直接看模型圖</br>
@@ -18,8 +18,8 @@
 ## Result
 ![result][fig2]</br>
 
-跟各個feature在不同次模型裡，出現次數的heat map。</br>
-![heat map][fig3]</br>
+跟各個feature在不同次模型裡，出現次數的heatmaps。</br>
+![heatmaps][fig3]</br>
 
 
 [fig1]: https://github.com/k123321141/SelectNet/blob/master/refs/Deep%20Feature%20Selection%20Theory%20and%20Application%20to%20Identify%20Enhancers%20and%20Promoters%2C%202016%2C%2032%20citations/fig1.png

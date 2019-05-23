@@ -68,7 +68,9 @@ def train(
         log_period=10, K=5):
     train_G = generator(train_dataloader)
     val_G = generator(val_dataloader)
-    writer = SummaryWriter('./logs/%s-a%f,b%f,g%f' % (log_name, alpha, beta, gamma))
+    ver = model.select_lay.ver
+    p = model.select_lay.p
+    writer = SummaryWriter('./logs/%s-v%d,p%.2f,a%f,b%f,g%f' % (log_name, ver, p, alpha, beta, gamma))
     iters = 1
     with tqdm(total=epochs*len(train_dataloader)) as pbar:
         for epoch in range(epochs):
@@ -107,7 +109,7 @@ def train(
 
                 pbar.update(1)
                 w_arr = model.w.cpu().detach().numpy().flatten()
-                w_prine = torch.sigmoid(model.w).cpu().detach().numpy().flatten()
+                # w_prine = torch.sigmoid(model.w).cpu().detach().numpy().flatten()
                 w_ratio = model.select_lay.calc_ratio().cpu().detach().numpy().flatten()
                 sorted_ratio = sorted([(feature_names[i], a) for i, a in enumerate(w_ratio)], key=lambda a: a[1])
 #                 display the top K feature and lowest K
@@ -179,12 +181,14 @@ def train(
                                 '%s' % feature_names[i]: v for i, v in enumerate(w_arr)
                             },
                             iters)
+                    '''
                     writer.add_scalars(
                             'data/w_prine',
                             {
                                 '%s' % feature_names[i]: v for i, v in enumerate(w_prine)
                             },
                             iters)
+                    '''
                     writer.add_scalars(
                             'data/w_ratio',
                             {

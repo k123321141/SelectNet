@@ -4,6 +4,8 @@
 >
 # Introduction
 Deep learning 一般來說是不做feature selection，其優異的分類能力，使人們仍然能夠接受黑箱的缺點。</br>
+在不傷害模型能力下，feature selection即便無法帶來性能上的改進，仍可以從Input dimension的縮減得到幫助。</br>
+幫助理解該資料及與模型的關係，甚或是資料及代表的意義。</br>
 Feature selection 在Network上有幾種做法：</br>
 1. weight based : 針對與某項feature相關的weight，越重要的feature其表現會作用在這些相關的weight上。
 2. output sensitivity based : 針對某項特定的feature對於模型的輸出影響力大小，常見做法是做feature ranking，然後逐次移除feature。
@@ -76,7 +78,8 @@ summary</br></br>
 
 
 
-### 單變量統計
+### 與network pruning的比較，CK的建議
+[TensorFlow Model Optimization Toolkit — Pruning API][https://medium.com/tensorflow/tensorflow-model-optimization-toolkit-pruning-api-42cac9157a6a?fbclid=IwAR2ZD9euHYiKh-OvuKYe4YltYCtosM_oJTlAdnN5AJwQUTDO9e8OW-8d9uM]
 
 
 ## other loss
@@ -141,11 +144,8 @@ support : 裡面提到了有weights-based(上面那篇)跟signal-to-noise retio�
 A unified algorithm for mixed   𝑙2,𝑝 -minimizations and its application in feature selection, 2014. 23.</br>
 Feature Selection at the Discrete Limit, AAAI, 2014. 31.</br>
 
-
-
-有提供相當多的performance比較，有簡單的單變量分析(chi-square, Fisher-score, etc.)</br>
-以及文中提到的一些方法，但是使用的dataset有些問題，不是太常見，而且需要申請。</br>
-再來是feature selection algorithm，並沒有詳細說明，猜測是先用ranking，然後逐一拿掉feature。</br>
+## model attack
+針對多類別分類模型的防禦，可以嘗試對特定class做feature selection，然後把這個feature set當作filter，藉此達到feature squeeze的效果。</br>
 
 [3]: https://github.com/k123321141/SelectNet/blob/master/refs/Feature%20screening%20using%20signal-to-noise%20ratios%2C%20nercom%2C%202010%2C%2096/README.md
 [6]: https://github.com/k123321141/SelectNet/blob/master/refs/Feature%20Selection-%20A%20Data%20Perspective%2C%20IEEE%2C%202018%2C%20265/README.md
