@@ -65,7 +65,7 @@ def warp_loss_fn(loss_criterion, x, y):
 def train(
         model, opt, src_loss_criterion, train_dataloader, val_dataloader,
         alpha, beta, gamma, epochs, noise_fn, metric_fn, log_name, feature_names,
-        log_period=10, K=5):
+        log_period=10, K=5, warn_up_acc=0.9):
     train_G = generator(train_dataloader)
     val_G = generator(val_dataloader)
     ver = model.select_lay.ver
@@ -88,9 +88,10 @@ def train(
                 loss = alpha*reg_loss + beta*w_loss + gamma*entropy_loss + src_loss
                 opt.zero_grad()
                 loss.backward()
+                # torch.nn.utils.clip_grad_norm_(model.parameters(), 10.*model.select_lay.in_dim)
                 opt.step()
-
                 with torch.no_grad():
+                    model.clip_w()
                     model.eval()
 
                     val_out = model(val_x)
@@ -106,6 +107,9 @@ def train(
                     val_acc = metric_fn(val_y, val_out)
                     noised_train_acc = metric_fn(y, noised_train_out)
                     noised_val_acc = metric_fn(val_y, noised_val_out)
+                    # warn up step
+                    if train_acc >= warn_up_acc:
+                        model.activate_w()
 
                 pbar.update(1)
                 w_arr = model.w.cpu().detach().numpy().flatten()
@@ -137,17 +141,12 @@ def train(
                             'data/src_loss',
                             {
                                 'train': src_loss.item(),
-                                'validation': val_src_loss.item()
+                                'validation': val_src_loss.item(),
+                                'noised_train': noised_src.item(),
+                                'noised_validation': val_noised_src.item()
                             },
                             iters
                             )
-                    writer.add_scalars(
-                            'data/noised_loss',
-                            {
-                                'train': noised_src.item(),
-                                'validation': val_noised_src.item()
-                            },
-                            iters)
                     writer.add_scalars(
                             'data/accuracy',
                             {
@@ -208,4 +207,4 @@ def train(
     print 'done'
 
 
-print "^((?!.*((w_prine)|(w_value)).*).)*$"
+print "^((?!.*((w_ratio)|(w_value)).*).)*$"
