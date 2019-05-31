@@ -55,7 +55,7 @@ class SelectLayer(nn.Module):
         elif self.ver in [2, 4]:
             w_prine = F.relu(self.w)
             w_ratio = w_prine / torch.sum(w_prine)
-            w_ratio = torch.clamp(w_ratio-0.01, 0, 1)
+            w_ratio = torch.clamp(w_ratio-(0.1/self.in_dim), 0, 1)
         elif self.ver in [3]:
             w_prine = self.smooth_sigmoid(self.w)
             w_ratio = w_prine / torch.sum(w_prine)

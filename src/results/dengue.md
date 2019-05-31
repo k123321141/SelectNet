@@ -1,37 +1,13 @@
-## Synthesized dataset introduction
-這是一個在高維空間中線性的資料集，其具體方程式如下：</br>
-<a href="https://www.codecogs.com/eqnedit.php?latex=y&space;=&space;0.02x_1^3-0.5x_1^2&plus;0.8x_2&plus;12" target="_blank"><img src="https://latex.codecogs.com/gif.latex?y&space;=&space;0.02x_1^3-0.5x_1^2&plus;0.8x_2&plus;12" title="y = 0.02x_1^3-0.5x_1^2+0.8x_2+12" /></a></br>
-透過y < 0 = positive做切分，在x1, x2的分佈如下圖。</br>
-![data distribution][synthesized_fig1]</br>
-僅x1,x2為相關項，其餘一共增加了額外6項跟target function無關的變數。</br>
-如果feature selection做得夠好，應該要從8個變數中，找出x1,x2才是有效變數。</br>
-
+## Dengue dataset introduction
+總共有63項feature，其中有部分feature有缺失值，缺失處理則用平均值補上。</br>
+目前人工找到用6個feature的表現最佳，分別是：</br>
+WBC, Plt, Hb, age, Temp, sex</br>
 
 ## redundent feature
-新增一項-0.5x2，這是一個有效的feature，可以檢驗是否能夠濾除redundent feature。</br>
-
-## random feature
-新增兩項不同分布的random feature，分別是，uniform random跟normal random。</br>
-其分佈涵蓋範圍跟x1,x2很相近，不是離群值。</br>
-
-## random permutation
-這是這篇的想法</br>
-DeepPINK reproducible feature selection in deep neural networks, IEEE, 2018, 7</br>
-作者針對每個feature單獨產生符合相應分佈但是卻完全與label獨立的假feature。</br>
-我分別透過對x1, x1^2, x2 做random permutaion，如此一來便保證random permutaion是跟label無關，但保有某些性質。</br>
-這邊也許可以再透過對不同feature group做random permutaion，以保證多變量的相關性(某種轉換下的同質feature group)</br>
-x1 permutation, x1^2 permutation, x2 permutation</br>
-
-## noise
-2個有效feature加上6個應該被去除的feature總共8項，為了滿足論文假設1.feature selection會有改進</br>
-我對8個feature都加入了10% missing noise，分別對8個feature獨立sample出各自10%當作missing，透過剩下90%計算出平均值取代missing value。</br>
-如此一來model可能透過其他noise feature去overfit，如果能夠選出有效的feature就能避免overfit並改善準確度。</br>
-值得一提的是當reduent feature沒有一起missing時，是否就能夠帶來好處而不被feature selection所拋棄？</br>
+MAP = F(SBP, DBP)
 
 ## Experiment Assumption
 1. feature selection improvement in accuracy performation.</br>
-2. 透過修改不重要的feature，可以看出模型對這些feature的敏感度，如此也能避免adversarial attack。</br>
-
 
 ## Results
 
@@ -40,17 +16,9 @@ x1 permutation, x1^2 permutation, x2 permutation</br>
 *假設存在missing value時，model可能透過fit training set裡面其他不相關的feature，而造成了overfitting。</br>
 如果確實發生了overfitting，就可以看到train & val的差異。</br>*
 ![performance improvement][acc_train_vs_val]</br>
-這張圖比較了train & val上的差異，只有training set是有missing的。</br>
-結論：唯v1的performance在train & val均低於v0, v2，並沒有看出overfit的問題，或是得到顯著improvement。</br>
-也許是noise影響不夠大或是問題太簡單，可以嘗試非線性的轉換，或是比較離散的dataset，嘗試考慮decision tree overfit的現象。</br>
-
-### Denoised Capability
-這邊要探討的是，當確定有些feature是不相關的，在不相關的feature上增加noise，正確的模型應該不受影響。</br>
-*假設存在不相關feature時，正確的模型應該不受不相關的feature影響</br>
-透過對不相關的feature加上random noise，如果模型學習錯誤的feature，表現就會降低。</br>*
-![Denoised capability][acc_noised_train_vs_noised_val]</br>
-這張圖比較了train & val上的差異，在訓練過程中，模型都沒有看過加過噪音的資料。</br>
-結論：唯v1的performance在train & val均低於v0, v2，noise並沒有造成明顯影響，顯然三者模型都有denoised能力。</br>
+這張圖比較了train & val上的差異，在training set以及testing set都是有missing的。</br>
+結論：v1的performance在train & val均低於v0, v2。而v0產生了overfitting，v2則保持相似的水準。</br>
+由此看出v0受到missing noise的影響也許很大，但由於testing set其實是存在相同分布的missing，所以無法確認是否是missing造成，還是over-training。</br>
 
 ### Feature Selection
 這邊要討論如何根據模型收斂的結果，找出有效的feature。</br>

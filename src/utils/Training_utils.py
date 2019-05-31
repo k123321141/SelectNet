@@ -65,7 +65,7 @@ def warp_loss_fn(loss_criterion, x, y):
 def train(
         model, opt, src_loss_criterion, train_dataloader, val_dataloader,
         alpha, beta, gamma, epochs, noise_fn, metric_fn, log_name, feature_names,
-        log_period=10, K=5, warn_up_acc=0.9):
+        log_period=10, K=5, warmup_acc=0.9):
     train_G = generator(train_dataloader)
     val_G = generator(val_dataloader)
     ver = model.select_lay.ver
@@ -89,28 +89,26 @@ def train(
                 opt.zero_grad()
                 loss.backward()
                 # torch.nn.utils.clip_grad_norm_(model.parameters(), 10.*model.select_lay.in_dim)
-                opt.step()
                 with torch.no_grad():
-                    model.clip_w()
                     model.eval()
-
                     val_out = model(val_x)
                     val_src_loss = warp_loss_fn(src_loss_criterion, val_out, val_y)
-
-    #                 noised
+    #                 output
                     noised_train_out = model(noised_x)
                     noised_val_out = model(val_noised_x)
                     noised_src = warp_loss_fn(src_loss_criterion, noised_train_out, y)
                     val_noised_src = warp_loss_fn(src_loss_criterion, noised_val_out, val_y)
     #                 acc
-                    train_acc = metric_fn(y, train_out)
+                    train_acc = metric_fn(y, model(x))
                     val_acc = metric_fn(val_y, val_out)
                     noised_train_acc = metric_fn(y, noised_train_out)
                     noised_val_acc = metric_fn(val_y, noised_val_out)
-                    # warn up step
-                    if train_acc >= warn_up_acc:
+                    # warmup step
+                    if train_acc >= warmup_acc:
                         model.activate_w()
 
+                opt.step()
+                model.clip_w()
                 pbar.update(1)
                 w_arr = model.w.cpu().detach().numpy().flatten()
                 # w_prine = torch.sigmoid(model.w).cpu().detach().numpy().flatten()
